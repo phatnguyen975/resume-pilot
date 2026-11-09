@@ -88,7 +88,7 @@ Human information + authorized supporting documents
 
 Only `confirmed` records and highlights may appear in a CV. An approved profile can retain unresolved items when the human agrees to exclude them. See the [workflow and data contract](docs/workflow.md).
 
-Run `python scripts/cv.py themes` to see nine themes. Theme names do not restrict their use to particular professions. The human may manually add official PDF previews using [examples/README.md](examples/README.md). Missing previews do not block creation. The agent must obtain a theme choice, not assume a default.
+Run `python scripts/cv.py themes` to see nine themes. Theme names do not restrict their use to particular professions. Official PDF previews are included in `examples/`; see [examples/README.md](examples/README.md) for source links and instructions to restore missing files. Missing previews do not block creation. The agent must obtain a theme choice, not assume a default.
 
 `target_pages` is the human-approved page count for the delivered PDF. The agent selects relevant confirmed content, adjusts the layout and repeats rendering and review until the PDF matches that count and remains readable. Do not add filler or unsupported claims to fill pages. If the requested count cannot be met responsibly, explain the issue and obtain a revised target before delivery.
 
@@ -128,7 +128,7 @@ Output is currently keyed by the YAML **file stem**, including targeted CVs: `re
 | `docs/`                                 | Workflow, data contract and maintenance conventions                  |
 | `schemas/`                              | Profile and preferences JSON Schemas                                 |
 | `templates/`                            | Fictional YAML format examples                                       |
-| `examples/`                             | Manual official theme gallery and source links                       |
+| `examples/`                             | Official theme PDF previews and source links                         |
 | `scripts/`                              | Bootstrap, workflow CLI and development checks                       |
 | `tests/`, `.github/workflows/ci.yml`    | Tests and Linux/Windows CI                                           |
 | `data/`, `resumes/`, `jobs/`, `output/` | Private runtime data, Git-ignored                                    |

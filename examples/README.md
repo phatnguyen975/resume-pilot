@@ -1,6 +1,6 @@
 # RenderCV Theme Previews
 
-This flat directory is an optional **gallery for the human**, not RenderCV input or a source of candidate facts. The repository ships the instructions and source links; humans may add official PDFs locally. Theme names do not restrict which professions can use them.
+This flat directory is an optional **gallery for the human**, not RenderCV input or a source of candidate facts. The repository includes all nine official RenderCV v2.8 theme PDFs with their original filenames. Use the source links below to restore missing previews. Theme names do not restrict which professions can use them.
 
 ## Add Previews
 
