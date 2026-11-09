@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Resume Pilot Preferences",
+  "description": "Human-approved presentation choices, reviewed with candidate facts. Example values do not imply consent.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["resume"],
+  "properties": {
+    "resume": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["theme", "language", "target_pages"],
+      "properties": {
+        "theme": {
+          "description": "Human-selected RenderCV theme; theme names do not restrict profession.",
+          "type": "string",
+          "enum": [
+            "classic",
+            "engineeringresumes",
+            "engineeringclassic",
+            "harvard",
+            "sb2nov",
+            "moderncv",
+            "ink",
+            "opal",
+            "ember"
+          ]
+        },
+        "language": {
+          "description": "RenderCV locale for labels and dates. The agent must separately write prose in the requested CV language.",
+          "type": "string",
+          "enum": [
+            "english",
+            "arabic",
+            "danish",
+            "dutch",
+            "french",
+            "german",
+            "hebrew",
+            "hindi",
+            "hungarian",
+            "indonesian",
+            "italian",
+            "japanese",
+            "korean",
+            "mandarin_chinese",
+            "norwegian_bokmål",
+            "norwegian_nynorsk",
+            "persian",
+            "portuguese",
+            "russian",
+            "spanish",
+            "turkish",
+            "vietnamese"
+          ]
+        },
+        "target_pages": {
+          "description": "Human-approved page count required for the delivered PDF. The agent must render, inspect and revise until the actual count matches; current CLI upper-bound checks alone do not establish compliance.",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        }
+      }
+    },
+    "base_preferences_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

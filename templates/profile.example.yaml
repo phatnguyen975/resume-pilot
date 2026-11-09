@@ -1,0 +1,91 @@
+# yaml-language-server: $schema=../schemas/profile.schema.json
+# ALL details below are fictional and for format illustration only.
+# Save a new, user-specific draft at data/profile.draft.yaml (ignored by Git).
+# One fictional operations profile, not a required section order or skill set.
+# Omit irrelevant groups. See docs/workflow.md for confirmation semantics.
+schema_version: 1
+base_profile_sha256: null
+candidate:
+  full_name: "Example Candidate"
+  headline: "Operations Analyst"
+  location: "Example City"
+  email: "example@example.com"
+  phone: null # International format if included, e.g. +84901234567
+  website: "https://example.com"
+  links:
+    - label: "Portfolio"
+      url: "https://example.com/portfolio"
+  verification: "confirmed"
+  evidence: ["human:interview"]
+target_roles: ["Operations Analyst", "Business Analyst"]
+summary_notes: "Interview context only; derive CV claims from confirmed records, not this field."
+skills:
+  - id: "skill-python"
+    name: "Python"
+    category: "Analysis tools"
+    verification: "confirmed"
+    evidence: ["project-example"]
+    notes: "Used in the sample project."
+  - id: "skill-spreadsheets"
+    name: "Spreadsheets"
+    category: "Analysis tools"
+    verification: "confirmed"
+    evidence: ["project-example"]
+  - id: "skill-process-documentation"
+    name: "Process documentation"
+    category: "Methods"
+    verification: "confirmed"
+    evidence: ["exp-example"]
+  - id: "skill-data-analysis"
+    name: "Data analysis"
+    category: "Methods"
+    verification: "confirmed"
+    evidence: ["project-example"]
+experience:
+  - id: "exp-example"
+    company: "Example Organization"
+    position: "Operations Analyst"
+    location: "Remote"
+    start_date: "2024-01"
+    end_date: "2025-03"
+    summary: "Supported reporting for a fictional operations team."
+    highlights:
+      - text: "Prepared a sample report documenting process observations."
+        verification: "confirmed"
+        evidence: ["human:interview"]
+    verification: "confirmed"
+    evidence: ["human:interview"]
+projects:
+  - id: "project-example"
+    name: "Example Project"
+    role: "Analyst"
+    start_date: "2025-04"
+    end_date: null
+    url: "https://example.com/project"
+    technologies: ["Python", "Spreadsheets"]
+    summary: "A demonstration project, not a real accomplishment."
+    highlights:
+      - text: "Organized sample data and documented analysis steps."
+        verification: "confirmed"
+        evidence: ["human:interview"]
+    verification: "confirmed"
+    evidence: ["human:interview"]
+education:
+  - id: "edu-example"
+    institution: "Example University"
+    area: "Business Administration"
+    degree: "BS"
+    location: "Example City"
+    start_date: "2020-09"
+    end_date: "2024-06"
+    gpa: null
+    highlights: []
+    verification: "confirmed"
+    evidence: ["human:interview"]
+certifications: []
+awards: []
+publications: []
+volunteering: []
+languages: []
+additional: []
+open_questions: []

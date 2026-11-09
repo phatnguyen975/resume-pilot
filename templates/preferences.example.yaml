@@ -1,0 +1,8 @@
+# Fictional presentation example, not a human decision or an industry requirement.
+# Ask for theme, CV content language/locale and target page count before review.
+# target_pages is the required final PDF page count. Render, inspect and revise until it matches.
+# See examples/README.md and `python scripts/cv.py themes`.
+resume:
+  theme: engineeringresumes
+  language: english
+  target_pages: 1

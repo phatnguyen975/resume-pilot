@@ -1,0 +1,228 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/resume-pilot/profile.schema.json",
+  "title": "Resume Pilot Candidate Profile v1",
+  "description": "Candidate facts across professions. Only human-confirmed records and highlights may supply CV claims; see docs/workflow.md for field semantics.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "candidate"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "base_profile_sha256": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      ]
+    },
+    "candidate": { "$ref": "#/$defs/candidate" },
+    "target_roles": {
+      "$ref": "#/$defs/strings",
+      "description": "Application goals, not evidence of positions held."
+    },
+    "summary_notes": {
+      "type": "string",
+      "description": "Interview context; not an independently confirmed CV claim."
+    },
+    "skills": { "type": "array", "items": { "$ref": "#/$defs/skill" } },
+    "experience": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/experience" }
+    },
+    "projects": { "type": "array", "items": { "$ref": "#/$defs/project" } },
+    "education": { "type": "array", "items": { "$ref": "#/$defs/education" } },
+    "certifications": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/generic" }
+    },
+    "awards": { "type": "array", "items": { "$ref": "#/$defs/generic" } },
+    "publications": { "type": "array", "items": { "$ref": "#/$defs/generic" } },
+    "volunteering": { "type": "array", "items": { "$ref": "#/$defs/generic" } },
+    "languages": { "type": "array", "items": { "$ref": "#/$defs/generic" } },
+    "additional": { "type": "array", "items": { "$ref": "#/$defs/generic" } },
+    "open_questions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/question" }
+    }
+  },
+  "$defs": {
+    "nonempty": { "type": "string", "minLength": 1 },
+    "strings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/nonempty" },
+      "uniqueItems": true
+    },
+    "verification": {
+      "type": "string",
+      "enum": ["confirmed", "needs_review", "inferred"],
+      "description": "Confirmed means explicitly confirmed by the human. Other statuses must be excluded from CVs."
+    },
+    "date": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "string",
+          "pattern": "^(?:[0-9]{4}(?:-(?:0[1-9]|1[0-2])(?:-(?:0[1-9]|[12][0-9]|3[01]))?)?|present)$"
+        }
+      ]
+    },
+    "claims": { "type": "array", "items": { "$ref": "#/$defs/claim" } },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "verification"],
+      "properties": {
+        "text": { "$ref": "#/$defs/nonempty" },
+        "verification": { "$ref": "#/$defs/verification" },
+        "evidence": { "$ref": "#/$defs/strings" }
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "url"],
+        "properties": {
+          "label": { "$ref": "#/$defs/nonempty" },
+          "url": { "type": "string", "pattern": "^https?://\\S+$" }
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["full_name", "verification"],
+      "properties": {
+        "full_name": { "$ref": "#/$defs/nonempty" },
+        "headline": { "type": ["string", "null"] },
+        "location": { "type": ["string", "null"] },
+        "email": { "type": ["string", "null"], "format": "email" },
+        "phone": { "type": ["string", "null"] },
+        "website": { "type": ["string", "null"], "format": "uri" },
+        "links": { "$ref": "#/$defs/links" },
+        "verification": { "$ref": "#/$defs/verification" },
+        "evidence": { "$ref": "#/$defs/strings" }
+      }
+    },
+    "recordFields": {
+      "type": "object",
+      "required": ["id", "verification"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+        "verification": { "$ref": "#/$defs/verification" },
+        "evidence": { "$ref": "#/$defs/strings" },
+        "notes": {
+          "type": "string",
+          "description": "Context for the agent, not an independent CV claim."
+        }
+      }
+    },
+    "skill": {
+      "allOf": [
+        { "$ref": "#/$defs/recordFields" },
+        {
+          "type": "object",
+          "required": ["name", "category"],
+          "properties": {
+            "name": { "$ref": "#/$defs/nonempty" },
+            "category": {
+              "$ref": "#/$defs/nonempty",
+              "description": "Free-text grouping for occupational skills, methods, tools or transferable skills."
+            }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "experience": {
+      "allOf": [
+        { "$ref": "#/$defs/recordFields" },
+        {
+          "type": "object",
+          "required": ["company", "position"],
+          "properties": {
+            "company": { "$ref": "#/$defs/nonempty" },
+            "position": { "$ref": "#/$defs/nonempty" },
+            "location": { "type": ["string", "null"] },
+            "start_date": { "$ref": "#/$defs/date" },
+            "end_date": { "$ref": "#/$defs/date" },
+            "summary": { "type": "string" },
+            "highlights": { "$ref": "#/$defs/claims" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "project": {
+      "allOf": [
+        { "$ref": "#/$defs/recordFields" },
+        {
+          "type": "object",
+          "required": ["name"],
+          "properties": {
+            "name": { "$ref": "#/$defs/nonempty" },
+            "role": { "type": "string" },
+            "start_date": { "$ref": "#/$defs/date" },
+            "end_date": { "$ref": "#/$defs/date" },
+            "url": { "type": ["string", "null"], "format": "uri" },
+            "technologies": {
+              "$ref": "#/$defs/strings",
+              "description": "Optional technologies or tools actually used; omit for projects where irrelevant."
+            },
+            "summary": { "type": "string" },
+            "highlights": { "$ref": "#/$defs/claims" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "education": {
+      "allOf": [
+        { "$ref": "#/$defs/recordFields" },
+        {
+          "type": "object",
+          "required": ["institution", "area"],
+          "properties": {
+            "institution": { "$ref": "#/$defs/nonempty" },
+            "area": { "$ref": "#/$defs/nonempty" },
+            "degree": { "type": ["string", "null"] },
+            "location": { "type": ["string", "null"] },
+            "start_date": { "$ref": "#/$defs/date" },
+            "end_date": { "$ref": "#/$defs/date" },
+            "gpa": { "type": ["string", "null"] },
+            "highlights": { "$ref": "#/$defs/claims" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "generic": {
+      "allOf": [
+        { "$ref": "#/$defs/recordFields" },
+        {
+          "type": "object",
+          "required": ["title"],
+          "properties": {
+            "title": { "$ref": "#/$defs/nonempty" },
+            "organization": { "type": ["string", "null"] },
+            "date": { "$ref": "#/$defs/date" },
+            "url": { "type": ["string", "null"], "format": "uri" },
+            "description": { "type": "string" },
+            "highlights": { "$ref": "#/$defs/claims" }
+          }
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "question"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+        "question": { "$ref": "#/$defs/nonempty" },
+        "context": { "type": "string" }
+      }
+    }
+  }
+}

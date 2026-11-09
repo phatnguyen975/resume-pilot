@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+# Example-only, synthetic content. Agent must NOT copy these claims into a real CV.
+# The official schema (above) documents ALL supported optional fields.
+# One fictional operations CV; adapt sections to the profession and confirmed facts.
+# design/locale below are example values; real builds use approved preferences.
+cv:
+  name: "Example Candidate"
+  headline: "Operations Analyst"
+  location: "Example City"
+  email: "example@example.com"
+  website: "https://example.com"
+  sections:
+    summary:
+      - "Operations analyst supporting reporting and process documentation."
+    skills:
+      - label: "Methods"
+        details: "Process documentation, data analysis"
+      - label: "Tools"
+        details: "Spreadsheets, Python"
+    experience:
+      - company: "Example Organization"
+        position: "Operations Analyst"
+        start_date: "2024-01"
+        end_date: "2025-03"
+        location: "Remote"
+        highlights:
+          - "Prepared a sample report documenting process observations."
+    projects:
+      - name: "Example Project"
+        date: "2025-04"
+        summary: "Demonstration project for the starter template."
+        highlights:
+          - "Organized sample data and documented analysis steps."
+    education:
+      - institution: "Example University"
+        area: "Business Administration"
+        degree: "BS"
+        end_date: "2024-06"
+        location: "Example City"
+design:
+  theme: "engineeringresumes"
+locale:
+  language: "english"
+settings: {}
