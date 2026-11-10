@@ -1,0 +1,32 @@
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Python ${{ matrix.python }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.12", "3.14"]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Bootstrap and RenderCV Smoke Test
+        run: python scripts/bootstrap.py --dev
+      - name: Lint and Formatting
+        run: python scripts/dev.py lint
+      - name: Type Checks
+        run: python scripts/dev.py type
+      - name: Tests, Real Renders and Coverage
+        run: python scripts/dev.py coverage
