@@ -114,9 +114,9 @@ Run from the repository root. Real CV commands require the bootstrapped environm
 | `python scripts/cv.py audit --pdf output/master_cv/resume.pdf --max-pages 1`           | Inspect PDF structure with an explicit page upper bound                |
 | `python scripts/cv.py build --example --input templates/rendercv.example.yaml`         | Render the fictional example without approved candidate data           |
 
-Build accepts `--theme harvard` and `--max-pages 2` as one-time overrides. Agents use them only when requested or approved; they do not update preferences. Standalone audit defaults to an upper bound of two pages, so pass the agreed target explicitly. The agent must also verify that the actual page count equals the target; this flag alone does not establish an exact match.
+Build accepts `--theme harvard` and `--max-pages 2` as one-time overrides. For build, `--max-pages` sets the required exact page count; mismatches fail the build audit. Agents use overrides only when requested or approved; they do not update preferences. Standalone audit uses `--max-pages` only as an upper bound and defaults to two pages. The agent must still verify the agreed page target, factual support and visual quality.
 
-Output is currently keyed by the YAML **file stem**, including targeted CVs: `resumes/targeted/<company>_<role>_cv.yaml` produces `output/<company>_<role>_cv/`. Use unique stems to prevent collisions.
+Output is keyed by the YAML **file stem**, including targeted CVs: `resumes/targeted/<company>_<role>_cv.yaml` produces `output/<company>_<role>_cv/`. Build requires lowercase snake_case filenames ending in `_cv.yaml` and rejects an output directory associated with another source. Use unique stems. Failed audit attempts are saved separately under `output/failed/<stem>/attempt_*/`; they do not replace the last successful build.
 
 ## Repository Map
 
@@ -146,7 +146,10 @@ For code maintenance:
 ```bash
 python scripts/bootstrap.py --dev
 python scripts/dev.py check
+python scripts/dev.py coverage
 ```
+
+Coverage includes branches and must reach 90%. Each development run prints its own `Quality output` directory under `output/quality/runs/<run_id>/`. Coverage reports are saved there as `coverage.json` and `html/index.html`; test PDFs and previews are under `integration/`. Temporary files, tool caches and coverage data are isolated per run so human and agent accounts do not share owner-only pytest directories. Tests include real renders for all nine themes, Vietnamese glyphs and a two-page CV using fictional data. Python warnings fail tests. CI runs these checks on Windows/Linux with Python 3.12 and 3.14.
 
 ## References
 

@@ -56,9 +56,9 @@ Build passes approved theme/locale as RenderCV CLI overrides without editing sou
 
 The agent must compare the rendered count with this target, select and edit relevant confirmed content, adjust readable typography/spacing and rebuild. Repeat factual, structural and visual checks after changes until the count matches. Do not fill pages with invented content, repetition or blank pages, or compress text into an unreadable layout. If the target is unsuitable for the available evidence, explain why and obtain a revised target before delivery.
 
-Current CLI checks reject excessive pages but do not reject fewer pages or automatically fit content. The agent must explicitly check equality between the PDF page count and `target_pages`; a passing CLI report alone does not establish compliance.
+Build rejects both fewer and more pages than the approved target; it does not automatically fit content. The agent must revise and rebuild until the target is met. A passing report establishes structural page-count compliance, not factual accuracy or visual quality.
 
-A human-authorized one-time page target replaces the stored target only for that CV. The CLI's `--max-pages` flag supplies its upper-bound check; the agent must still check the actual count against the agreed target. Persistent target changes use the dual-draft review gate. A one-time override does not edit preferences.
+A human-authorized one-time page target replaces the stored target only for that CV. Build's `--max-pages` flag sets this exact target; standalone audit uses the same flag only as an upper bound. Persistent target changes use the dual-draft review gate. A one-time override does not edit preferences.
 
 | Check layer | Scope                                                                                                            |
 | ----------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -66,9 +66,9 @@ A human-authorized one-time page target replaces the stored target only for that
 | Agent       | Claim traceability, full extracted text, every preview, exact page-target match, link destinations and relevance |
 | Human       | PDF and unresolved issues before final approval                                                                  |
 
-`audit.json` stores statistics/warnings and the build's theme/locale, **not full extracted text**. Read text with a local PDF tool or pypdf in `.venv`; do not upload it elsewhere without authorization.
+`audit.json` records the source path, actual/target page counts, theme/locale, overrides, preview filenames and structural statistics/warnings, **not full extracted text**. Build checks one preview per PDF page and basic PNG headers. Read text with a local PDF tool or pypdf in `.venv`; do not upload it elsewhere without authorization.
 
-Use unique YAML stems: builds share an output directory when stems match even across subdirectories. On build failure inspect diagnostics and artifacts; old output is not proof of a successful new build.
+Use unique YAML stems: builds share an output directory when stems match even across subdirectories. Build rejects collisions with a different source and existing output without reliable source metadata. Preserve or relocate such output before rebuilding. Failed audits are saved under `output/failed/<stem>/attempt_*/`, while the last successful build is retained. On failure inspect diagnostics and artifacts; old output is not proof of a successful new build.
 
 ## Gate 2: PDF Review
 

@@ -75,7 +75,7 @@ The human chooses the CV content language and target page count; do not assume E
 
 Render, compare actual PDF pages to `target_pages`, adjust relevant confirmed content and readable layout, then rebuild and re-audit until the counts match. Never use filler, blank pages or unsupported facts to reach the target. If it cannot be met appropriately, obtain a revised target from the human.
 
-The current CLI checks only an upper bound; it does not fit content or prove an exact match. For an authorized one-time target use `--max-pages <n>` and explicitly check the final count against that target. Use unique file stems across resume subdirectories to avoid output collisions.
+Build enforces the exact page target but does not automatically fit content. For an authorized one-time target use `--max-pages <n>`; standalone audit uses that flag only as an upper bound. Use unique lowercase snake_case stems ending in `_cv.yaml`. Build rejects output collisions with another source and preserves successful output when a new audit fails; inspect failed artifacts under `output/failed/<stem>/attempt_*/`.
 
 ## Entry Types
 

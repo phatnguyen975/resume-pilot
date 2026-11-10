@@ -23,7 +23,7 @@ description: Audit a finished RenderCV CV across professions for factual support
 
 ## Page Target
 
-Compare the actual PDF page count to approved `target_pages` or a human-authorized one-time target. Both fewer and more pages are mismatches. The current CLI only checks an upper bound, so a passing report does not establish this requirement.
+Compare the actual PDF page count to approved `target_pages` or a human-authorized one-time target. Build rejects both fewer and more pages and checks preview count and basic PNG headers. Standalone audit checks only its upper bound. A passing build still requires factual and visual review; a correct count does not establish readable layout.
 
 Revise relevant confirmed content and readable layout, rebuild and repeat the audit until the counts match. Do not add filler, blank pages or invented claims, or sacrifice readability. If the target is unsuitable, obtain a revised target before requesting final approval. Report requested and actual counts together.
 

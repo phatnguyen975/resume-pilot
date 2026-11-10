@@ -55,7 +55,7 @@
           ]
         },
         "target_pages": {
-          "description": "Human-approved page count required for the delivered PDF. The agent must render, inspect and revise until the actual count matches; current CLI upper-bound checks alone do not establish compliance.",
+          "description": "Human-approved page count required for the delivered PDF. Build rejects any mismatch; the agent revises and rebuilds while preserving factual accuracy and readable layout.",
           "type": "integer",
           "minimum": 1,
           "maximum": 4

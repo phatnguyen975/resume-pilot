@@ -108,7 +108,10 @@ Use the project-local development environment:
 ```bash
 python scripts/bootstrap.py --dev
 python scripts/dev.py check
+python scripts/dev.py coverage
 ```
+
+Coverage measures statements and branches in `scripts/`, with a minimum of 90%. Each development run uses a fresh directory under ignored `output/quality/runs/`. Keep pytest temporary files/cache, Ruff cache, coverage data and fictional render artifacts within that run. Do not reuse shared owner-only pytest directories across human and agent accounts or relax warning checks to hide permission failures.
 
 Run checks appropriate to the change and record actual results, failures and omissions. Mocked tests do not establish real RenderCV or platform compatibility. Use fictional candidate data for tests and render checks; keep personal data out of fixtures and shared reports.
 
