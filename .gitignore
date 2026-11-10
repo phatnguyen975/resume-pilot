@@ -1,0 +1,23 @@
+# Personal information and generated content (NEVER commit these by default)
+/data/
+/resumes/
+/jobs/
+/output/
+
+# Local environments and caches
+/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.basedpyright/
+.pyright/
+.coverage
+.coverage.*
+htmlcov/
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json

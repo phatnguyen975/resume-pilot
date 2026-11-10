@@ -1,0 +1,40 @@
+# Tool configuration only. pip + requirements*.txt manages dependencies.
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+include = ["*.py"]
+exclude = [".venv", "output", "data", "resumes", "jobs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.basedpyright]
+include = ["scripts", "tests"]
+exclude = [".venv", "output", "data", "resumes", "jobs"]
+pythonVersion = "3.12"
+typeCheckingMode = "standard"
+reportMissingTypeStubs = false
+reportUnknownMemberType = false
+reportUnknownArgumentType = false
+reportUnknownVariableType = false
+reportUnknownParameterType = false
+reportAny = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+filterwarnings = ["error"]
+markers = ["integration: real RenderCV rendering with synthetic candidate data"]
+
+[tool.coverage.run]
+branch = true
+source = ["scripts"]
+
+[tool.coverage.report]
+show_missing = true
+precision = 2
+fail_under = 90
